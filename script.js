@@ -58,6 +58,8 @@ attachHyperlink(hyperlinks[2], 'https://www.crisrieder.org/thejourney/wp-content
 
 const Library = [];
 
+// VERIFY THE TYPE OF FILE
+
 function Book(title, author, pages, status = 'unread', cover, hyperlink){
   return {
     title,

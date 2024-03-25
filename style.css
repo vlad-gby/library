@@ -45,7 +45,7 @@ header{
   cursor: pointer;
 }
 .logo h1{
-  font-size: 64px;
+  font-size: 60px;
   font-weight: 600;
   transform: translate(-20px, -30px);
   cursor: pointer;
@@ -69,6 +69,7 @@ header{
   font-weight: 600;
   font-family: var(--font-body);
   color: var(--clr-text-secondary);
+  margin-bottom: 8px;
 }
 .controls button{
   display: flex;
@@ -165,22 +166,6 @@ header{
   font-weight: 700;
 }
 
-/* .text-content .status{
-  display: flex;
-  gap: 4px;
-  position: absolute;
-
-  top: 8px;
-  right: 8px;
-  height: 22px;
-  border: 1px solid var(--clr-border);
-  border-radius: 4px;
-  padding: 1px;
-}
-.status img.selected{
-  background-color: var(--clr-border);
-} */
-
 .text-content form, .status{
   display: flex;
   align-items: center;
@@ -206,19 +191,19 @@ header{
 .text-content input:checked, .status input:checked{
   background-color: var(--clr-border);
 }
-.text-content input:nth-child(1), .status input:nth-child(1){
+.text-content input:nth-child(1), #unread{
   background-image: url(img/not-seen.svg);
 }
-.text-content input:nth-child(2), .status input:nth-child(2){
+.text-content input:nth-child(2), #started{
   background-image: url(img/started.svg);
 }
-.text-content input:nth-child(3), .status input:nth-child(3){
+.text-content input:nth-child(3), #finished{
   background-image: url(img/read.svg);
 }
 
 
 .big-form{
-  width: 60vw;
+  width: min(calc(30vw + 400px), 105%);
   height: 60vh;
   background-color: var(--clr-bg);
   box-shadow: 0 0 10px 10px var(--clr-bg);
@@ -236,23 +221,87 @@ header{
   font-size: 44px;
   font-weight: 600;
 }
+.big-form h2{
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
 .big-form form{
   display: flex;
-
+  gap: calc(15% - 50px);
+  margin: 16px 0;
 }
+.big-form input{
+  display: block;
+  font-size: 16px;
+  padding: 4px 8px;
+  margin: 4px;
+  border: 2px solid var(--clr-border);
+  border-radius: 4px;
+  outline: none;
+}
+.big-form label{
+  font-size: 20px;
+  color: var(--clr-text);
+  font-family: var(--font-body);
+}
+[type='text'], [type='number']{
+  width: 100%;
+}
+
 .col1{
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  flex: 1;
-}
-.col2{
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  gap: 16px;
   flex: 1;
 }
 
-.big-form input{
-  display: block;
+.col2{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
+#cover{
+  border: none;
+  width:100%;
+}
+.status{
+  padding: 0;
+  width: 100%;
+  align-items: stretch;
+  position: static;
+  border: none;
+  gap: 8px;
+}
+.status input{
+  border: none;
+  height: 24px;
+  width: 32px;
+}
+.status label{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 20px;
+}
+
+.submit{
+  display: block;
+  background-color: var(--clr-green);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--clr-text);
+  border: 2px solid var(--clr-border);
+  border-radius: 4px;
+  padding: 12px 64px;
+  margin: 0 auto;
+}
+
+
+
+
+
+
+

@@ -1,0 +1,71 @@
+*, *::after, *::before{
+  box-sizing: border-box;
+}
+body{
+  background-color: antiquewhite;
+  font-family: Baskerville, "Baskerville Old Face", "Hoefler Text", Garamond, "Times New Roman", serif;
+
+  --clr-bg-accent: rgb(197, 176, 148);
+  --clr-text-head: rgb(78, 60, 38);
+  --clr-text: rgb(34, 27, 17);
+  --clr-border: rgb(130, 109, 83);
+}
+
+.container{
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: stretch;
+
+  background-color: rgb(234, 206, 170);
+  width: 70vw;
+  min-height: 400px;
+  margin: 0 auto;
+  color: var(--clr-text-head)
+}
+
+header{
+  min-height: 100px;
+  background-color: var(--clr-bg-accent);
+  box-shadow: 0 1px 4px black;
+}
+.logo{
+  display: flex;
+  align-items: flex-end;
+}
+.logo img{
+  width: 200px;
+}
+.logo h1{
+  font-size: 64px;
+  font-weight: 600;
+  transform: translate(-20px, -20px);
+}
+
+.controls{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  min-height: 50px;
+  border-top: 2px solid var(--clr-border);
+  border-bottom: 2px solid var(--clr-border);
+  padding: 0 5%;
+}
+.sort{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.sort button{
+  background-color: var(--clr-bg-accent);
+  padding: 6px 12px;
+  border: 2px solid var(--clr-border);
+  border-radius: 4px;
+  color: var(--clr-text)
+}
+.sort button.sorted-up::after{
+  content: url(img/arrow_up.svg);
+  font-size: 20px;
+}
+

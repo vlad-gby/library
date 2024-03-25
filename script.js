@@ -37,7 +37,7 @@ statusBtns.forEach(button => {
   });
 });
 
-// OPEN A GOOGLE BOOKS
+// ATTACHING HYPERLINKS
 const hyperlinks = [];
 hyperlinks.push(document.querySelector('.card:nth-child(1) .hyperlink'), document.querySelector('.card:nth-child(2) .hyperlink'), document.querySelector('.card:nth-child(3) .hyperlink'));
 
@@ -54,7 +54,21 @@ attachHyperlink(hyperlinks[1], 'https://www.arvindguptatoys.com/arvindgupta/oldm
 attachHyperlink(hyperlinks[2], 'https://www.crisrieder.org/thejourney/wp-content/uploads/2021/02/Jonathan-Livingston-Seagull.pdf');
 
 
+// CREATE THE MAIN LOGIC
 
+const Library = [];
+
+function Book(title, author, pages, status = 'unread', cover, hyperlink){
+  return {
+    title,
+    author,
+    pages,
+    status,
+    cover,
+    hyperlink
+  }
+
+}
 
 
 

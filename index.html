@@ -32,6 +32,28 @@
       <button class="new-book">Add New</button>
     </div>
 
+    <div class="big-form">
+      <h1>Add a new book!</h1>
+      <form action="#" method="post">
+
+        <fieldset class="col1">
+          <label for="title">Title: <input id="title" type="text" name="title"></label>
+          <label for="author"> Author<input type="text" id="author" name="author"></label>
+          <label for="pages">Number of pages:<input type="number" id="pages" name="pages"></label>
+        </fieldset>
+
+        <fieldset class="col2">
+          <input type="file" name="cover">
+          <fieldset class="status">
+            <input type="radio" name="status" checked>
+            <input type="radio" name="status">
+            <input type="radio" name="status">
+          </fieldset>
+          <input type="text" name="hyperlink" id="hyperlink">
+        </fieldset>
+      </form>
+    </div>
+
     <div class="cards">
       <div class="card">
         <img src="img/book-covers/journey.png" alt="Book's cover">
@@ -96,7 +118,6 @@
           </form>
         </div>
       </div>
-     
     </div>
 
   </div>

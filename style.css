@@ -3,11 +3,13 @@
 }
 body{
   background-color: antiquewhite;
-  font-family: Baskerville, "Baskerville Old Face", "Hoefler Text", Garamond, "Times New Roman", serif;
+  --font-display: 'Baskerville', "Baskerville Old Face", "Hoefler Text", Garamond, "Times New Roman", serif;
+  --font-body: Garamond, "Times New Roman", serif;
 
   --clr-bg-accent: rgb(197, 176, 148);
-  --clr-text-head: rgb(78, 60, 38);
+  --clr-text-head: hsl(33, 34%, 23%);
   --clr-text: rgb(34, 27, 17);
+  --clr-text-secondary: rgb(82, 69, 51);
   --clr-border: rgb(130, 109, 83);
 }
 
@@ -18,7 +20,8 @@ body{
   align-items: stretch;
 
   background-color: rgb(234, 206, 170);
-  width: 70vw;
+  box-shadow: 0 0 16px 4px var(--clr-border);
+  width: calc(70vw + 120px);
   min-height: 400px;
   margin: 0 auto;
   color: var(--clr-text-head)
@@ -27,7 +30,8 @@ body{
 header{
   min-height: 100px;
   background-color: var(--clr-bg-accent);
-  box-shadow: 0 1px 4px black;
+  box-shadow: inset 0 -4px 8px var(--clr-text-secondary);
+  font-family: var(--font-display);
 }
 .logo{
   display: flex;
@@ -35,11 +39,13 @@ header{
 }
 .logo img{
   width: 200px;
+  cursor: pointer;
 }
 .logo h1{
   font-size: 64px;
   font-weight: 600;
   transform: translate(-20px, -20px);
+  cursor: pointer;
 }
 
 .controls{
@@ -47,25 +53,109 @@ header{
   align-items: center;
   justify-content: space-between;
 
-  min-height: 50px;
   border-top: 2px solid var(--clr-border);
   border-bottom: 2px solid var(--clr-border);
-  padding: 0 5%;
+  padding: 8px 5%;
 }
 .sort{
   display: flex;
   align-items: center;
   gap: 12px;
 }
-.sort button{
+.sort h2{
+  font-weight: 600;
+  font-family: var(--font-body);
+  color: var(--clr-text-secondary);
+}
+.controls button{
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
   background-color: var(--clr-bg-accent);
-  padding: 6px 12px;
+  padding: 4px 12px;
   border: 2px solid var(--clr-border);
   border-radius: 4px;
-  color: var(--clr-text)
+  color: var(--clr-text);
+  font-weight: 600;
+  font-size: 16px;
+  font-family: var(--font-body)
 }
 .sort button.sorted-up::after{
-  content: url(img/arrow_up.svg);
-  font-size: 20px;
+  content: '';
+  display: block;
+  width: 16px;
+  height: 16px;
+  background-image: url(img/arrow_up.svg);
+  background-size: cover;
+}
+.sort button.sorted-down::after{
+  content: '';
+  display: block;
+  width: 16px;
+  height: 16px;
+  background-image: url(img/arrow_down.svg);
+  background-size: cover;
+}
+.controls .new-book{
+  background-color: rgb(183, 204, 64);
+  padding: 8px 16px;
+}
+
+
+.cards{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px 16px;
+  padding: 0 24px;
+}
+.card{
+  display: flex;
+  gap: 16px;
+  position: relative;
+
+  background-color: var(--clr-bg-accent);
+  box-shadow: 0 4px 6px var(--clr-border);
+  /* border: 1.5px solid var(--clr-border); */
+  border-radius: 4px;
+  min-height: 100px;
+  padding: 12px 20px;
+}
+.card img{
+  max-width: 40%;
+  align-self: center;
+  opacity: 90%;
+  border-radius: 4px;
+}
+
+.text-content{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.text-content p{
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--clr-text)
+}
+.text-content h1, .text-content span{
+  font-weight: 600;
+  font-size: 22px;
+}
+
+.text-content .status{
+  display: flex;
+  gap: 4px;
+  position: absolute;
+
+  top: 8px;
+  right: 8px;
+  height: 22px;
+  border: 1px solid var(--clr-border);
+  border-radius: 4px;
+  padding: 1px;
+}
+.status img.selected{
+  background-color: var(--clr-border);
 }
 

@@ -53,12 +53,31 @@ attachHyperlink(hyperlinks[1], 'https://www.arvindguptatoys.com/arvindgupta/oldm
 
 attachHyperlink(hyperlinks[2], 'https://www.crisrieder.org/thejourney/wp-content/uploads/2021/02/Jonathan-Livingston-Seagull.pdf');
 
+// INVOKING AND CLOSIG THE DIALOG
+const newBook = document.querySelector('.new-book');
+const cancel = document.querySelector('.cancel');
+const dialog = document.querySelector('.big-form');
+
+const overlay = document.querySelector('.overlay');
+
+function closeDialog(){
+  dialog.style.transform = 'translate(100%, -50%)';
+  overlay.classList.add('hidden');
+
+}
+
+cancel.addEventListener('mouseup', e => {
+  closeDialog();
+});
+
+newBook.addEventListener('mouseup', e => {
+  dialog.style.transform = 'translate(-50%, -50%)';
+  overlay.classList.remove('hidden');
+});
+
 
 // CREATE THE MAIN LOGIC
-
 const Library = [];
-
-// VERIFY THE TYPE OF FILE
 
 function Book(title, author, pages, status = 'unread', cover, hyperlink){
   return {
@@ -69,8 +88,42 @@ function Book(title, author, pages, status = 'unread', cover, hyperlink){
     cover,
     hyperlink
   }
+}
+Library.push(new Book('Sumy City', 'Vladyslav Hubanov', 88, 'unread', null, null));
 
+function addBook(){
+  const title = document.querySelector('#title').value;
+  const author = document.querySelector('#author').value;
+  const pages = !document.querySelector('#pages').value && null;
+  const status = document.querySelector('.status input:checked').id;
+  const hyperlink = !document.querySelector('#hyperlink').value && null;
+  
+  const coverFile = document.querySelector('#cover').files[0];
+  const reader = new FileReader();
+  if(coverFile)reader.readAsDataURL(coverFile);
+  const coverURL = !reader.result && null;
+  
+  Library.push(new Book(title, author, pages, status, coverURL, hyperlink));
+  console.log(Library[1]);
 }
 
+
+const submit = document.querySelector('.submit');
+
+submit.addEventListener('mouseup', e => {
+  closeDialog();
+  addBook();
+
+  // const coverFile = document.querySelector('#cover').files[0];
+
+  // if(coverFile){
+  //   const reader = new FileReader();
+  //   reader.readAsDataURL(coverFile);
+
+  //   reader.addEventListener('load', e => {
+  //     console.log(reader.result)
+  //   });
+  // }
+});
 
 

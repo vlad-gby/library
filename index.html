@@ -8,7 +8,52 @@
   <title>Library</title>
 </head>
 <body>
+
+  <div class="big-form">
+    <div class="cancel">
+
+    </div>
+    <h1>Add a new book!</h1>
+    <form action="#" method="post">
+
+      <div class="col1">
+        <label for="title">Title
+          <input id="title" type="text" name="title" required>
+        </label>
+        <label for="author"> Author
+          <input type="text" id="author" name="author" required>
+        </label>
+        <label for="pages">Number of pages
+          <input type="number" min="1" id="pages" name="pages">
+        </label>
+      </div>
+
+      <div class="col2">
+        <label for="cover">Choose a cover for your book:
+          <input type="file" accept="image/png, image/jpeg" capture="environment" id="cover" name="cover">
+        </label>
+        <div class="status">
+          <h2>Where have you stopped?</h2>
+          <label for="unread">Unread
+            <input type="radio" id="unread" name="status" checked>
+          </label>
+          <label for="started">Started
+            <input type="radio" id="started" name="status">
+          </label>
+          <label for="finished">Finished
+            <input type="radio" id="finished" name="status">
+          </label>
+        </div>
+        <label for="hyperlink">Link to where you can you read it
+          <input type="text" name="hyperlink" id="hyperlink">
+        </label>
+      </div>
+    </form>
+    <input type="submit" id="submit" class="submit" value="Add a Book">
+  </div>
   
+  <div class="overlay hidden"></div>
+
   <div class="container">
     <header>
       <div class="logo">
@@ -32,30 +77,6 @@
       <button class="new-book">Add New</button>
     </div>
 
-    <div class="big-form">
-      <h1>Add a new book!</h1>
-      <form action="#" method="post">
-
-        <div class="col1">
-          <label for="title">Title: <input id="title" type="text" name="title"></label>
-          <label for="author"> Author<input type="text" id="author" name="author"></label>
-          <label for="pages">Number of pages:<input type="number" min="1" id="pages" name="pages"></label>
-        </div>
-
-        <div class="col2">
-          <label for="cover">Choose a cover for your book:<input type="file" accept="image/png, image/jpeg" capture="environment" id="cover" name="cover"></label>
-          <div class="status">
-            <h2>Where have you stopped?</h2>
-            <label for="unread">Unread<input type="radio" id="unread" name="status" checked></label>
-            <label for="started">Started<input type="radio" id="started" name="status"></label>
-            <label for="finished">Finished<input type="radio" id="finished" name="status"></label>
-          </div>
-          <label for="hyperlink">Where can you read it:<input type="text" name="hyperlink" id="hyperlink"></label>
-        </div>
-      </form>
-      <button class="submit">Add a Book</button>
-    </div>
-
     <div class="cards">
       <div class="card">
         <img src="img/book-covers/journey.png" alt="Book's cover">
@@ -65,7 +86,10 @@
           <p>Author:</p>
           <h1>Jules Verne</h1>
           <p>Pages: <span>437</span></p>
-          <button class="hyperlink">Read the Book</button>
+          <div class="card-ctrl">
+            <button class="hyperlink">Read the Book</button>
+            <button class="remove"></button>
+          </div>
           <form action="#" method="post">
             <input type="radio" name="status">
             <input type="radio" name="status">
@@ -81,7 +105,10 @@
           <p>Author:</p>
           <h1>Ernest Hemingway</h1>
           <p>Pages: <span>68</span></p>
-          <button class="hyperlink">Read the Book</button>
+          <div class="card-ctrl">
+            <button class="hyperlink">Read the Book</button>
+            <button class="remove"></button>
+          </div>
           <form action="#" method="post">
             <input type="radio" name="status">
             <input type="radio" name="status">
@@ -97,7 +124,10 @@
           <p>Author:</p>
           <h1>Richard Bach</h1>
           <p>Pages: <span>144</span></p>
-          <button class="hyperlink">Read the Book</button>
+          <div class="card-ctrl">
+            <button class="hyperlink">Read the Book</button>
+            <button class="remove"></button>
+          </div>
           <form action="#" method="post">
             <input type="radio" name="status">
             <input type="radio" name="status">
@@ -111,5 +141,6 @@
 
   <script src="script.js"></script>
 
+  <!-- Add .cancel, .overlay and UI for .remove -->
 </body>
 </html>

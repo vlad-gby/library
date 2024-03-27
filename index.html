@@ -10,11 +10,10 @@
 <body>
 
   <div class="big-form">
-    <div class="cancel">
-
-    </div>
+    <div class="cancel"></div>
     <h1>Add a new book!</h1>
-    <form action="#" method="post">
+    
+    <form action="#" id="form" method="post">
 
       <div class="col1">
         <label for="title">Title
@@ -33,7 +32,6 @@
           <input type="file" accept="image/png, image/jpeg" capture="environment" id="cover" name="cover">
         </label>
         <div class="status">
-          <h2>Where have you stopped?</h2>
           <label for="unread">Unread
             <input type="radio" id="unread" name="status" checked>
           </label>
@@ -45,11 +43,11 @@
           </label>
         </div>
         <label for="hyperlink">Link to where you can you read it
-          <input type="text" name="hyperlink" id="hyperlink">
+          <input type="url" placeholder="https://" name="hyperlink" id="hyperlink">
         </label>
       </div>
     </form>
-    <input type="submit" id="submit" class="submit" value="Add a Book">
+    <input type="submit" form="form" id="submit" class="submit" value="Add a Book">
   </div>
   
   <div class="overlay hidden"></div>
@@ -140,7 +138,5 @@
   </div>
 
   <script src="script.js"></script>
-
-  <!-- Add .cancel, .overlay and UI for .remove -->
 </body>
 </html>

@@ -1,5 +1,5 @@
 // ADD EVENT-LISTENERS TO BUTTONS
-const allButtons = document.querySelectorAll('button');
+const allButtons = document.querySelectorAll('button, .submit');
 
 allButtons.forEach(button => {
   button.addEventListener('mouseover', e => {
@@ -108,11 +108,14 @@ function addBook(){
 }
 
 
-const submit = document.querySelector('.submit');
+// const submit = document.querySelector('.submit');
+const form = document.querySelector('#form');
 
-submit.addEventListener('mouseup', e => {
+form.addEventListener('submit', e => {
+  e.preventDefault();
   closeDialog();
   addBook();
+  
 
   // const coverFile = document.querySelector('#cover').files[0];
 

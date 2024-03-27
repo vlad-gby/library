@@ -264,11 +264,6 @@ header{
   font-size: 44px;
   font-weight: 600;
 }
-.big-form h2{
-  font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 8px;
-}
 .big-form form{
   display: flex;
   gap: calc(15% - 50px);
@@ -283,7 +278,7 @@ header{
   border-radius: 4px;
   outline: none;
 }
-[type='text'], [type='number']{
+[type='text'], [type='number'], [type='url']{
   width: 100%;
 }
 .big-form label{
@@ -319,16 +314,18 @@ header{
 }
 .status{
   padding: 0;
-  width: 100%;
+  width: 80%;
   align-items: stretch;
+  justify-content: space-evenly;
   position: static;
   border: none;
   gap: 8px;
 }
 .status input{
   border: none;
-  height: 24px;
-  width: 32px;
+  height: 28px;
+  width: 28px;
+  transition: all 0.1s ease-in-out;
 }
 .status label{
   display: flex;

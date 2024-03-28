@@ -74,9 +74,33 @@
       </div>
       <button class="new-book">Add New</button>
     </div>
-
+    <!-- MAKE A HOVER OVER CARD AND ABILITY TO EDIT THE BOOK -->
     <div class="cards">
-      <div class="card">
+      <div class="card card-template">
+        <img src="img/book-covers/place-holder.png" alt="Book's cover">
+        <div class="text-content">
+          <div>
+            <p>Title:</p>
+            <h1 class="card-title"></h1>
+          </div>
+          <div>
+            <p>Author:</p>
+            <h1 class="card-author"></h1>
+          </div>
+          <p>Pages: <span class="card-pages"></span></p>
+          <div class="card-ctrl">
+            <button class="hyperlink">Read the Book</button>
+            <button class="remove"></button>
+          </div>
+          <form class="card-status" action="#" method="post">
+            <input class="unread" type="radio" name="status" checked>
+            <input class="started" type="radio" name="status">
+            <input class="finished" type="radio" name="status">
+          </form>
+        </div>
+      </div>
+
+      <!-- <div class="card">
         <img src="img/book-covers/journey.png" alt="Book's cover">
         <div class="text-content">
           <p>Title:</p>
@@ -132,7 +156,8 @@
             <input type="radio" name="status" checked>
           </form>
         </div>
-      </div>
+      </div> -->
+
     </div>
 
   </div>

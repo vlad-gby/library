@@ -30,7 +30,7 @@ body{
   background-color: var(--clr-bg);
   box-shadow: 0 0 16px 4px var(--clr-border);
   width: calc(70vw + 120px);
-  min-height: 400px;
+  min-height: 500px;
   color: var(--clr-text-head);
   padding-bottom: 24px;
 }
@@ -134,10 +134,9 @@ header{
 
   background-color: var(--clr-bg-accent);
   box-shadow: 0 4px 6px var(--clr-border);
-  /* border: 1.5px solid var(--clr-border); */
   border-radius: 4px;
   min-height: 100px;
-  padding: 12px 20px;
+  padding: 24px 16px;
 }
 .card img{
   max-width: 40%;
@@ -158,11 +157,13 @@ header{
 }
 .text-content h1, .text-content span{
   font-weight: 600;
-  font-size: 22px;
+  font-size: 20px;
+  margin-top: 4px;
 }
 .card-ctrl{
   display: flex;
   gap: 4px;
+  height: 28px;
 }
 .hyperlink{
   color: var(--clr-text);
@@ -185,7 +186,10 @@ header{
   background-position: center;
 }
 
-.text-content form, .status{
+.card-template{
+  display: none;
+}
+.card-status, .status{
   display: flex;
   align-items: center;
   gap: 4px;

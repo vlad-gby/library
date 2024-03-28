@@ -46,8 +46,9 @@ header{
   align-items: flex-end;
 }
 .logo img{
-  width: 200px;
+  width: 150px;
   cursor: pointer;
+  margin-left: 50px;
 }
 .logo h1{
   font-size: 60px;
@@ -74,7 +75,6 @@ header{
   font-weight: 600;
   font-family: var(--font-body);
   color: var(--clr-text-secondary);
-  margin-bottom: 8px;
 }
 .controls button{
   display: flex;
@@ -184,6 +184,17 @@ header{
   background-image: url(img/delete.svg);
   background-size: cover;
   background-position: center;
+}
+.consent{
+  align-self: stretch;
+  width: 24px;
+  background-color: var(--clr-red);
+  border-radius: 4px;
+  border: 2px solid var(--clr-border);
+  background-image: url(img/started.svg);
+  background-size: cover;
+  background-position: center;
+  display: none;
 }
 
 .card-template{

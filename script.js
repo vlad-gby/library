@@ -66,19 +66,11 @@ newBook.addEventListener('mouseup', e => {
 
 
 // CREATE THE LIBRARY
-const Library = {
-  defaultBooks: [],
-  books: [],
-  display: displayLibrary
-  
-};
+const Library = [];
 
-// ADD DEFAULT BOOKS
-const cards = document.querySelectorAll('.card');
-cards.forEach(card => {
-  Library.defaultBooks.push(card);
-});
-
+// ADD A TEMPLATE
+const template = document.querySelector('.card-template');
+Library.push(template);
 
 // BOOK CONSTRUCTOR
 function Book(title, author, pages, status, cover, hyperlink, forDOM){
@@ -155,11 +147,34 @@ function createForDOM(title, author, pages, status, cover, hyperlink){
     break;
   }
 
+  // ACTIVATE MY CONTROLS AND BOOK STATUS
   if(hyperlink){
     attachHyperlink(forDOM.querySelector('.hyperlink'), hyperlink);
   } else{
     forDOM.querySelector('.hyperlink').style.display = 'none';
   }
+  forDOM.querySelector('.remove').addEventListener('click', isConsent, true);
+  forDOM.querySelector('.consent').addEventListener('click', removeCard);
+
+  forDOM.querySelectorAll('.card-status input').forEach(option => {
+    option.addEventListener('mouseup', checkThis);
+  });
+
+
+  forDOM.querySelectorAll('.hyperlink, .remove').forEach(button => {
+    button.addEventListener('mouseover', e => {
+      button.style.backgroundColor = changeColor(button, -20);
+    });
+    button.addEventListener('mouseout', e => {
+      button.style.backgroundColor = changeColor(button, 20);
+    });
+    button.addEventListener('mousedown', e => {
+      button.style.backgroundColor = changeColor(button, -20);
+    });
+    button.addEventListener('mouseup', e => {
+      button.style.backgroundColor = changeColor(button, 20);
+    });
+  });
 
   return forDOM;
 }
@@ -172,28 +187,29 @@ function addBook(){
       inputData[4] = value[1];
 
       const forDOM = createForDOM(...inputData);
-      Library.books.push(new Book(...inputData, forDOM));
+      Library.push(new Book(...inputData, forDOM));
       displayLibrary();
     });
   } else{
     const forDOM = createForDOM(...inputDataResult);
-    Library.books.push(new Book(...inputDataResult, forDOM));
+    Library.push(new Book(...inputDataResult, forDOM));
     displayLibrary();
   }
 }
 
 function displayLibrary(){
   const cards = document.querySelector('.cards');
-  Library.books.forEach(book => {
-    cards.appendChild(book.forDOM);
-  });
+  cards.innerHTML = '';
+  for(let i = 1; i < Library.length; i++){
+    cards.appendChild(Library[i].forDOM);
+  }
 }
 
 function addBookManually(title, author, pages, status, coverFileName, hyperlink){
   const inputData = [title, author, pages, status, `img/book-covers/${coverFileName}`, hyperlink];
   
   const forDOM = createForDOM(...inputData);
-  Library.books.push(new Book(...inputData, forDOM));
+  Library.push(new Book(...inputData, forDOM));
   displayLibrary();
 }
 
@@ -224,7 +240,6 @@ addBookManually(
   'https://www.crisrieder.org/thejourney/wp-content/uploads/2021/02/Jonathan-Livingston-Seagull.pdf'
 );
 
-
 const form = document.querySelector('#form');
 form.addEventListener('submit', e => {
   e.preventDefault();
@@ -233,10 +248,42 @@ form.addEventListener('submit', e => {
 });
 
 
+// REMOVE BUTTON
+function isConsent(){
+  const consentBtn = this.nextSibling.nextSibling;
+  const binBtn = this;
+  consentBtn.style.display = 'block';
+  binBtn.style.display = 'none';
+
+  function back(){
+    consentBtn.style.display = 'none';
+    binBtn.style.display = 'block';
+    window.removeEventListener('click', back);
+  }
+  window.addEventListener('mouseup', back);
+}
+function removeCard(){
+  const thisCard = this.parentNode.parentNode.parentNode;
+  for(let i = 1; i < Library.length; i++){
+    if(Library[i].forDOM === thisCard){
+      Library.splice(i, 1);
+      break;
+    }
+  }
+  displayLibrary();
+  console.log(Library);
+}
+
+// STATUS STATE UPDATE
+function checkThis(){
+  const thisCard = this.parentNode.parentNode.parentNode;
+  const state = this.classList[0];
+  for(let i = 1; i < Library.length; i++){
+    if(Library[i].forDOM === thisCard){
+      Library[i].status = state;
+      break;
+    }
+  }
+}
 
 
-// attachHyperlink(hyperlinks[0], 'https://books.googleusercontent.com/books/content?req=AKW5Qaefla-E5X81NGARGOYiJiZrsiMJE1ZteeEYCWBsZC3t11etwnwpy2Bkog8Y-qHvOvBTd4kmWikXF5DldJLT_KZ4_Cxw5Jvi3nPNUuL-H_lNiQqigH5XXDYC1ourBGiM9N2kn_ZQ_2q9FVDXuRgSkSZ0n_jZkQCpzjNT_rbWzeM63dd0X-Huqz6Hjo93xUFJEhFFsYRsqQFFMpgneNJqTv1PpmCJFJN86TYbaKa4Tch8sSFrj8onCWyqauUlZpEa_XPfagxGikHpzxDwsiFBNa5JjGmYzw');
-
-// attachHyperlink(hyperlinks[1], 'https://www.arvindguptatoys.com/arvindgupta/oldmansea.pdf');
-
-// attachHyperlink(hyperlinks[2], 'https://www.crisrieder.org/thejourney/wp-content/uploads/2021/02/Jonathan-Livingston-Seagull.pdf');

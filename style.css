@@ -17,6 +17,9 @@ body{
   --clr-green: rgb(183, 204, 64);
   --clr-red: rgb(204, 127, 64);
 }
+button{
+  cursor: pointer;
+}
 
 .container{
   display: flex;
@@ -95,7 +98,7 @@ header{
   display: block;
   width: 16px;
   height: 16px;
-  background-image: url(img/arrow_up.svg);
+  background-image: url(img/arrow-up.svg);
   background-size: cover;
 }
 .sort button.sorted-down::after{
@@ -103,7 +106,7 @@ header{
   display: block;
   width: 16px;
   height: 16px;
-  background-image: url(img/arrow_down.svg);
+  background-image: url(img/arrow-down.svg);
   background-size: cover;
 }
 .sort button.only-by::after{
@@ -120,7 +123,9 @@ header{
   font-size: 18px;
 }
 
-
+.card-template{
+  display: none;
+}
 .cards{
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -137,6 +142,11 @@ header{
   border-radius: 4px;
   min-height: 100px;
   padding: 24px 16px;
+}
+.card:hover{
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px var(--clr-border);
+  transition: all 0.05s ease-in-out;
 }
 .card img{
   max-width: 40%;
@@ -175,6 +185,11 @@ header{
   font-family: var(--font-body);
   font-weight: 700;
 }
+.hyperlink img{
+  display: inline;
+  width: 12px;
+  transform: scale(1.2);
+}
 .remove{
   align-self: stretch;
   width: 24px;
@@ -197,9 +212,7 @@ header{
   display: none;
 }
 
-.card-template{
-  display: none;
-}
+
 .card-status, .status{
   display: flex;
   align-items: center;
@@ -221,6 +234,7 @@ header{
   background-repeat: no-repeat;
   width: 20px;
   height: 16px;
+  cursor: pointer;
 }
 .text-content input:checked, .status input:checked{
   background-color: var(--clr-border);
@@ -248,7 +262,7 @@ header{
   top: 50%;
   left: 50%;
   transform: translate(100%, -50%);
-  transition: all 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
   overflow-x: hidden;
 }
 .hidden{

@@ -221,7 +221,7 @@ addBookManually(
   437,
   'finished',
   'journey.png',
-  'https://books.googleusercontent.com/books/content?req=AKW5Qaefla-E5X81NGARGOYiJiZrsiMJE1ZteeEYCWBsZC3t11etwnwpy2Bkog8Y-qHvOvBTd4kmWikXF5DldJLT_KZ4_Cxw5Jvi3nPNUuL-H_lNiQqigH5XXDYC1ourBGiM9N2kn_ZQ_2q9FVDXuRgSkSZ0n_jZkQCpzjNT_rbWzeM63dd0X-Huqz6Hjo93xUFJEhFFsYRsqQFFMpgneNJqTv1PpmCJFJN86TYbaKa4Tch8sSFrj8onCWyqauUlZpEa_XPfagxGikHpzxDwsiFBNa5JjGmYzw'
+  'https://books.google.gr/books/about/A_Journey_Into_the_Interior_of_the_Earth.html?id=--ro1ELSrAEC&printsec=frontcover&source=kp_read_button&hl=en&redir_esc=y#v=onepage&q&f=false'
 );
 addBookManually(
   'The Old Man And The Sea',

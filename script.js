@@ -251,6 +251,7 @@ form.addEventListener('submit', e => {
   e.preventDefault();
   closeDialog();
   addBook();
+  form.reset();
 });
 
 

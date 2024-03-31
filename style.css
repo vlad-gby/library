@@ -24,7 +24,7 @@ button{
 .container{
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 20px;
   align-items: stretch;
   position: relative;
   left: 50%;
@@ -65,8 +65,8 @@ header{
   align-items: center;
   justify-content: space-between;
 
-  /* border-top: 2px solid var(--clr-border); */
-  /* border-bottom: 2px solid var(--clr-border); */
+  border-top: 2px solid var(--clr-border);
+  border-bottom: 2px solid var(--clr-border);
   padding: 8px 5%;
 }
 .sort{
@@ -93,7 +93,7 @@ header{
   font-size: 16px;
   font-family: var(--font-body)
 }
-.sort button.sorted-up::after{
+.sort button.sort-up::after{
   content: '';
   display: block;
   width: 16px;
@@ -101,7 +101,7 @@ header{
   background-image: url(img/arrow-up.svg);
   background-size: cover;
 }
-.sort button.sorted-down::after{
+.sort button.sort-down::after{
   content: '';
   display: block;
   width: 16px;
@@ -123,9 +123,6 @@ header{
   font-size: 18px;
 }
 
-.card-template{
-  display: none;
-}
 .cards{
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -136,12 +133,16 @@ header{
   display: flex;
   gap: 16px;
   position: relative;
-
+  
   background-color: var(--clr-bg-accent);
   box-shadow: 0 4px 6px var(--clr-border);
   border-radius: 4px;
   min-height: 100px;
   padding: 24px 16px;
+}
+.card-template{
+  visibility: hidden;
+  position: absolute;
 }
 .card:hover{
   transform: scale(1.02);

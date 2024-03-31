@@ -66,11 +66,10 @@ newBook.addEventListener('mouseup', e => {
 
 
 // CREATE THE LIBRARY
-const Library = [];
+let Library = [];
 
 // ADD A TEMPLATE
 const template = document.querySelector('.card-template');
-Library.push(template);
 
 // BOOK CONSTRUCTOR
 function Book(title, author, pages, status, cover, hyperlink, forDOM){
@@ -125,13 +124,19 @@ function collectInput(){
 
 // CREATE NEW .CARD
 function createForDOM(title, author, pages, status, cover, hyperlink){
-  const forDOM = document.querySelector('.card').cloneNode(true);
+  const forDOM = document.querySelector('.card-template').cloneNode(true);
   forDOM.classList.remove('card-template');
 
   forDOM.querySelector('.card-title').textContent = title;
   forDOM.querySelector('.card-author').textContent = author;
-  forDOM.querySelector('.card-pages').textContent = pages;
 
+  if(pages){
+    forDOM.querySelector('.card-pages').textContent = pages;
+  } else{
+    forDOM.querySelector('.card-pages').textContent = 'was not defined';
+
+  }
+  
   if(cover !== null){
     forDOM.querySelector('img').src = cover;
   }
@@ -200,9 +205,10 @@ function addBook(){
 function displayLibrary(){
   const cards = document.querySelector('.cards');
   cards.innerHTML = '';
-  for(let i = 1; i < Library.length; i++){
-    cards.appendChild(Library[i].forDOM);
-  }
+  cards.appendChild(template);
+  Library.forEach((book) => {
+    cards.appendChild(book.forDOM);
+  });
 }
 
 function addBookManually(title, author, pages, status, coverFileName, hyperlink){
@@ -264,26 +270,106 @@ function isConsent(){
 }
 function removeCard(){
   const thisCard = this.parentNode.parentNode.parentNode;
-  for(let i = 1; i < Library.length; i++){
-    if(Library[i].forDOM === thisCard){
-      Library.splice(i, 1);
-      break;
+  Library.forEach((book) => {
+    if(book.forDOM === thisCard){
+      Library.splice(Library.indexOf(book), 1);
+      return;
     }
-  }
+  });
+    
   displayLibrary();
-  console.log(Library);
 }
 
 // STATUS STATE UPDATE
 function checkThis(){
   const thisCard = this.parentNode.parentNode.parentNode;
   const state = this.classList[0];
-  for(let i = 1; i < Library.length; i++){
-    if(Library[i].forDOM === thisCard){
-      Library[i].status = state;
-      break;
+  Library.forEach((book) => {
+    if(book.forDOM === thisCard){
+      book.status = state;
+      return;
     }
-  }
+  });
 }
 
 
+// SORT FEATURE
+const byTitle = document.querySelector('#by-title');
+const byAuthor = document.querySelector('#by-author');
+const byPages = document.querySelector('#by-pages');
+
+byTitle.addEventListener('mouseup', sortByTitle);
+byAuthor.addEventListener('mouseup', sortByAuthor);
+byPages.addEventListener('mouseup', sortByPages);
+function sortByTitle(){
+  sort.by('title', this);
+}
+function sortByAuthor(){
+  sort.by('author', this);
+}
+function sortByPages(){
+  sort.by('pages', this);
+}
+
+const sort = {
+  isUp: true,
+
+  getParam: function(){
+    const titles = [];
+    const authors = [];
+    const pages = [];
+    Library.forEach(book => {
+      titles.push(book.title);
+      authors.push(book.author);
+      pages.push(book.pages);
+    });
+    return {
+      title: titles,
+      author: authors, 
+      pages}
+  },
+
+  by: function(param, thisBtn){
+    const paramList = this.getParam()[param];
+    const newLibrary = [];
+
+    if(sort.isUp){
+      sort.isUp = false;
+      paramList.sort();
+      if(typeof paramList[0] === 'number') paramList.sort((a,b) => a - b);
+      sortClass('sort-up', thisBtn);
+    } else{
+      sort.isUp = true;
+      paramList.sort().reverse();
+      if(typeof paramList[0] === 'number') paramList.sort((a,b) => b - a);
+      sortClass('sort-down', thisBtn);
+    }
+
+    paramList.forEach(value => {
+      Library.forEach(book => {
+        if(book[param] === value){
+          newLibrary.push(book);
+        }
+      });
+    });
+    Library = newLibrary;
+    displayLibrary();
+  }
+}
+
+function sortClass(order, btn){
+  const sortBtns = document.querySelectorAll('.sort button');
+  if(order === 'sort-up'){
+    sortBtns.forEach(btn => {
+      btn.classList.remove('sort-up');
+      btn.classList.remove('sort-down');
+    });
+    btn.classList.add('sort-up');
+  } if(order === 'sort-down'){
+    sortBtns.forEach(btn => {
+      btn.classList.remove('sort-up');
+      btn.classList.remove('sort-down');
+    });
+    btn.classList.add('sort-down');
+  }
+}

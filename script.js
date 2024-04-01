@@ -3,19 +3,17 @@
 const allButtons = document.querySelectorAll('button, .submit');
 
 allButtons.forEach(button => {
+  const darkenHandler = () => {
+    button.style.backgroundColor = changeColor(button, -20);
+  }
+  const lightenHandler = () => {
+    button.style.backgroundColor = changeColor(button, 20);
+  }
 
-  button.addEventListener('mouseover', e => {
-    button.style.backgroundColor = changeColor(button, -20);
-  });
-  button.addEventListener('mouseout', e => {
-    button.style.backgroundColor = changeColor(button, 20);
-  });
-  button.addEventListener('mousedown', e => {
-    button.style.backgroundColor = changeColor(button, -20);
-  });
-  button.addEventListener('mouseup', e => {
-    button.style.backgroundColor = changeColor(button, 20);
-  });
+  button.addEventListener('mouseover', darkenHandler);
+  button.addEventListener('mouseout', lightenHandler);
+  button.addEventListener('mousedown', darkenHandler);
+  button.addEventListener('mouseup', lightenHandler);
 });
 
 function changeColor(element, amount){

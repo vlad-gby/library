@@ -39,51 +39,50 @@ button{
 }
 
 header{
-  min-height: 100px;
   background-color: var(--clr-bg-accent);
   border-bottom: 4px solid var(--clr-text-head);
   font-family: var(--font-display);
 }
 .logo{
   display: flex;
-  align-items: flex-end;
+  align-items: center;
 }
 .logo img{
-  width: 150px;
+  width: calc(10vw + 16px);
   cursor: pointer;
-  margin-left: 50px;
+  margin-left: 3%;
 }
 .logo h1{
-  font-size: 60px;
+  font-size: calc(5vw + 16px);
   font-weight: 600;
-  transform: translate(-20px, -30px);
   cursor: pointer;
 }
 
 .controls{
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 16px;
+  flex-wrap: wrap;
 
   border-top: 2px solid var(--clr-border);
   border-bottom: 2px solid var(--clr-border);
   padding: 8px 5%;
 }
-.sort{
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.sort h2{
+.controls h2{
   font-weight: 600;
   font-family: var(--font-body);
   color: var(--clr-text-secondary);
 }
+.sort{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
 .controls button{
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
 
   background-color: var(--clr-bg-accent);
   padding: 4px 12px;
@@ -113,8 +112,8 @@ header{
 .sort button.only-by::after{
   content: '';
   display: block;
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   background-image: url(img/expand.svg);
   background-size: cover;
 }
@@ -126,7 +125,7 @@ header{
 
 .cards{
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 24px 16px;
   padding: 0 24px;
 }
@@ -178,6 +177,9 @@ header{
   height: 28px;
 }
 .hyperlink{
+  display: flex;
+  gap: 4px;
+
   color: var(--clr-text);
   background-color: var(--clr-green);
   border-radius: 4px;
@@ -189,9 +191,8 @@ header{
   font-size: 14px;
 }
 .hyperlink img{
-  display: inline;
-  width: 12px;
-  transform: scale(1.2);
+  width: 16px;
+  position: relative;
 }
 .remove{
   align-self: stretch;
@@ -264,16 +265,12 @@ header{
   z-index: 2;
   top: 50%;
   left: 50%;
-  transform: translate(100%, -50%);
+  transform: translate(120%, -50%);
   transition: transform 0.3s ease-in-out;
   overflow-x: hidden;
 }
 .hidden{
   display: none;
-}
-.blurry{
-  overflow-y: hidden;
-  filter: blur(5px) brightness(.5);
 }
 .overlay{
   position: fixed;

@@ -48,7 +48,7 @@ const dialog = document.querySelector('.big-form');
 const overlay = document.querySelector('.overlay');
 
 function closeDialog(){
-  dialog.style.transform = 'translate(100%, -50%)';
+  dialog.style.transform = 'translate(120%, -50%)';
   overlay.classList.add('hidden');
   
 }

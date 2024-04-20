@@ -1,86 +1,88 @@
 // ADD EVENT-LISTENERS FOR UI
+const UImodule = (function(){
 
-const allButtons = document.querySelectorAll('button, .submit');
-
-allButtons.forEach(button => {
-  const darkenHandler = () => {
-    button.style.backgroundColor = changeColor(button, -20);
-  }
-  const lightenHandler = () => {
-    button.style.backgroundColor = changeColor(button, 20);
+  // BUILDING FUNCTIONS
+  function changeColor(element, amount){
+    const color = getComputedStyle(element).backgroundColor;
+    const rawColor = color.slice(4, -1).split(', ');
+    return `rgb(${rawColor.map(num => Number(num) + amount)})`;
   }
 
-  button.addEventListener('mouseover', darkenHandler);
-  button.addEventListener('mouseout', lightenHandler);
-  button.addEventListener('mousedown', darkenHandler);
-  button.addEventListener('mouseup', lightenHandler);
-});
-
-function changeColor(element, amount){
-  const color = getComputedStyle(element).backgroundColor;
-  const rawColor = color.slice(4, -1).split(', ');
-  return `rgb(${rawColor.map(num => Number(num) + amount)})`;
-}
-
-const statusBtns = document.querySelectorAll('.status img:not(.selected)');
-
-statusBtns.forEach(button => {
-  button.addEventListener('mouseover', e => {
-    button.style.backgroundColor = 'rgb(130, 109, 83)';
-  });
-  button.addEventListener('mouseout', e => {
-    button.style.backgroundColor = 'rgba(0, 0, 0, 0)';
-  });
-  button.addEventListener('mouseup', e => {
-
-    button.style.backgroundColor = 'rgba(0, 0, 0, 0)';
-  });
-});
-
-
-
-
-// INVOKING AND CLOSIG THE DIALOG
-const newBook = document.querySelector('.new-book');
-const cancel = document.querySelector('.cancel');
-const dialog = document.querySelector('.big-form');
-
-const overlay = document.querySelector('.overlay');
-
-function closeDialog(){
-  dialog.style.transform = 'translate(120%, -50%)';
-  overlay.classList.add('hidden');
+  function showDialog(bool){
+    const dialog = document.querySelector('.big-form');
+    const overlay = document.querySelector('.overlay');
+    if(bool){
+      dialog.style.transform = 'translate(-50%, -50%)';
+      overlay.classList.remove('hidden');
+    } else if(!bool){
+      dialog.style.transform = 'translate(120%, -50%)';
+      overlay.classList.add('hidden');
+    }
+  }
   
-}
+  const btnHoverHandler = (button, isHover) => {
+    if(isHover){
+      button.style.backgroundColor = changeColor(button, -20);
+    } else if(!isHover){
+      button.style.backgroundColor = changeColor(button, 20);
+    }
+  }
 
-cancel.addEventListener('mouseup', e => {
-  closeDialog();
-});
+  // BUTTON HOVERS
+  const allButtons = document.querySelectorAll('button, .submit');
+  allButtons.forEach(button => {
+    button.addEventListener('mouseover', (e) => {
+      btnHoverHandler(e.target, true);
+    });
+    button.addEventListener('mouseout', (e) => {
+      btnHoverHandler(e.target, false);
+    });
+    button.addEventListener('mousedown', (e) => {
+      btnHoverHandler(e.target, true);
+    });
+    button.addEventListener('mouseup', (e) => {
+      btnHoverHandler(e.target, false);
+    });
+  });
 
-newBook.addEventListener('mouseup', e => {
-  dialog.style.transform = 'translate(-50%, -50%)';
-  overlay.classList.remove('hidden');
-});
+  // DIALOG LISTENERS
+  const newBook = document.querySelector('.new-book');
+  newBook.addEventListener('mouseup', e => {
+    showDialog(true);
+  });
+
+  const cancel = document.querySelector('.cancel');
+  cancel.addEventListener('mouseup', e => {
+    showDialog(false);
+  });
+
+  return {
+    showDialog,
+    changeColor,
+    btnHoverHandler
+  }
+
+})();
 
 
 // CREATE THE LIBRARY
 let Library = [];
 
-// ADD A TEMPLATE
 const template = document.querySelector('.card-template');
 
-// BOOK CONSTRUCTOR
-function Book(title, author, pages, status, cover, hyperlink, forDOM){
-  this.title = title,
-  this.author = author,
-  this.pages = pages,
-  this.status = status,
-  this.cover = cover,
-  this.hyperlink = hyperlink,
-  this.forDOM = forDOM
+class Book {
+  constructor(title, author, pages, status, cover, hyperlink, forDOM) {
+    this.title = title,
+    this.author = author,
+    this.pages = pages,
+    this.status = status,
+    this.cover = cover,
+    this.hyperlink = hyperlink,
+    this.forDOM = forDOM;
+  }
+
 }
 
-// ATTACHING HYPERLINKS
 function attachHyperlink(element, link){
   element.addEventListener('mouseup', e => {
     window.open(link, '_blank');
@@ -97,8 +99,8 @@ function collectInput(){
   
   // OPTIONAL ONES
   const pagesInp = document.querySelector('#pages').value;
-  const hyperlinkInp = document.querySelector('#hyperlink').value;
   const pages = pagesInp ? pagesInp : null;
+  const hyperlinkInp = document.querySelector('#hyperlink').value;
   const hyperlink = hyperlinkInp ? hyperlinkInp : null;
   
   // VALID AND COLLECT IMG DATA URL
@@ -165,17 +167,17 @@ function createForDOM(title, author, pages, status, cover, hyperlink){
 
 
   forDOM.querySelectorAll('.hyperlink, .remove').forEach(button => {
-    button.addEventListener('mouseover', e => {
-      button.style.backgroundColor = changeColor(button, -20);
+    button.addEventListener('mouseover', e => (e) => {
+      UImodule.btnHoverHandler(e.target, true);
     });
-    button.addEventListener('mouseout', e => {
-      button.style.backgroundColor = changeColor(button, 20);
+    button.addEventListener('mouseout', e => (e) => {
+      UImodule.btnHoverHandler(e.target, false);
     });
-    button.addEventListener('mousedown', e => {
-      button.style.backgroundColor = changeColor(button, -20);
+    button.addEventListener('mousedown', e => (e) => {
+      UImodule.btnHoverHandler(e.target, true);
     });
-    button.addEventListener('mouseup', e => {
-      button.style.backgroundColor = changeColor(button, 20);
+    button.addEventListener('mouseup', e => (e) => {
+      UImodule.btnHoverHandler(e.target, false);
     });
   });
 
@@ -217,37 +219,10 @@ function addBookManually(title, author, pages, status, coverFileName, hyperlink)
   displayLibrary();
 }
 
-// EXECUTION
-
-addBookManually(
-  'A Journey To The Centre Of The Earth',
-  'Jules Verne',
-  437,
-  'finished',
-  'journey.png',
-  'https://books.google.gr/books/about/A_Journey_Into_the_Interior_of_the_Earth.html?id=--ro1ELSrAEC&printsec=frontcover&source=kp_read_button&hl=en&redir_esc=y#v=onepage&q&f=false'
-);
-addBookManually(
-  'The Old Man And The Sea',
-  'Ernest Hemingway',
-  68,
-  'finished',
-  'old-man.png',
-  'https://www.arvindguptatoys.com/arvindgupta/oldmansea.pdf'
-);
-addBookManually(
-  'Jonathan Livingston Seagull',
-  'Richard Bach',
-  144,
-  'finished',
-  'seagull.png',
-  'https://www.crisrieder.org/thejourney/wp-content/uploads/2021/02/Jonathan-Livingston-Seagull.pdf'
-);
-
 const form = document.querySelector('#form');
 form.addEventListener('submit', e => {
   e.preventDefault();
-  closeDialog();
+  UImodule.showDialog(false);
   addBook();
   form.reset();
 });
@@ -372,3 +347,31 @@ function sortClass(order, btn){
     btn.classList.add('sort-down');
   }
 }
+
+// EXECUTION
+
+addBookManually(
+  'A Journey To The Centre Of The Earth',
+  'Jules Verne',
+  437,
+  'finished',
+  'journey.png',
+  'https://books.google.gr/books/about/A_Journey_Into_the_Interior_of_the_Earth.html?id=--ro1ELSrAEC&printsec=frontcover&source=kp_read_button&hl=en&redir_esc=y#v=onepage&q&f=false'
+);
+addBookManually(
+  'The Old Man And The Sea',
+  'Ernest Hemingway',
+  68,
+  'finished',
+  'old-man.png',
+  'https://www.arvindguptatoys.com/arvindgupta/oldmansea.pdf'
+);
+addBookManually(
+  'Jonathan Livingston Seagull',
+  'Richard Bach',
+  144,
+  'finished',
+  'seagull.png',
+  'https://www.crisrieder.org/thejourney/wp-content/uploads/2021/02/Jonathan-Livingston-Seagull.pdf'
+);
+
